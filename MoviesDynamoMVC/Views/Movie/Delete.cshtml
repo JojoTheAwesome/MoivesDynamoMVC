@@ -1,0 +1,53 @@
+﻿@model MovieRank.Libs.Models.MovieDb
+
+@{
+    ViewData["Title"] = "Delete";
+}
+
+<h2>Delete</h2>
+
+<h3>Are you sure you want to delete this?</h3>
+<div>
+    <h4>MovieDb</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.UserId)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.UserId)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.MovieName)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.MovieName)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.Description)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.Description)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.Ranking)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.Ranking)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.RankedDateTime)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.RankedDateTime)
+        </dd>
+    </dl>
+    
+    <form asp-action="Delete">
+        <input type="hidden" name="id" value=@Html.DisplayFor(model => model.UserId)>
+        <input type="hidden" name="movieName" value=@Html.DisplayFor(model => model.MovieName)>
+
+        <input type="submit" value="Delete" class="btn btn-default" id="DeleteButton" /> |
+        <a asp-action="Index">Back to List</a>
+    </form>
+</div>

@@ -1,0 +1,64 @@
+﻿@model IEnumerable<MovieRank.Libs.Models.MovieDb>
+
+@{
+    ViewData["Title"] = "Index";
+}
+
+<h2>Index</h2>
+
+@if (User.Identity.IsAuthenticated) {
+    <p><a asp-action="Create">Create New</a></p>
+}
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.MovieName)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Description)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.MainActor)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Ranking)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.RankedDateTime)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.MovieName)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Description)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.MainActor)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Ranking)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.RankedDateTime)
+            </td>
+            <td>
+                <a href="/Movie/Details/@item.UserId/@item.MovieName">Details</a>
+                @if (User.Identity.IsAuthenticated && (MoviesDynamoMVC.Controllers.AuthController.current.UserId == item.UserId || MoviesDynamoMVC.Controllers.AuthController.current.IsAdmin)) {
+                    @Html.ActionLink("Edit", "Edit", new { id = item.UserId, movieName = item.MovieName })
+                }
+                @if (User.Identity.IsAuthenticated && (MoviesDynamoMVC.Controllers.AuthController.current.UserId == item.UserId || MoviesDynamoMVC.Controllers.AuthController.current.IsAdmin)) {
+                    @Html.ActionLink("Delete", "Delete", new { id = item.UserId, movieName = item.MovieName })
+                }
+                
+            </td>
+        </tr>
+}
+    </tbody>
+</table>

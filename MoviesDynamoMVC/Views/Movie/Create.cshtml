@@ -1,0 +1,93 @@
+﻿@model MovieRank.Libs.Models.MovieDb
+
+@{
+    ViewData["Title"] = "Create";
+}
+
+    
+    </script>
+
+<h2>Create</h2>
+
+<h4>MovieDb</h4>
+<hr />
+
+<div class="row">
+    <div class="col-md-4">
+        <form asp-action="AddMovie">
+
+             <script>
+                function trimFunction(elementId) {
+                    var x = document.getElementById(elementId);
+                    x.value = x.value.trim();
+                }
+            </script>
+
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+
+            @*<div class="form-group">
+                <label asp-for="UserId" class="control-label"></label>
+                <input class="form-control input-validation-error" type="number" data-val="true"
+                       data-val-required="A user ID is required" id="UserId" name="UserId"
+                       value="" aria-describedby="UserId-error" aria-invalid="true">
+                <span asp-validation-for="UserId" class="text-danger"></span>
+            </div>*@
+
+            <div class="form-group">
+                <label asp-for="MovieName" class="control-label"></label>
+                <input class="form-control input-validation-error" type="text" data-val="true"
+                       data-val-required="A movie name is required" id="MovieName" name="MovieName" onfocusout="trimFunction('MovieName')"
+                       value="" aria-describedby="MovieName-error" aria-invalid="true" maxlength="50" required>
+                <span asp-validation-for="MovieName" class="text-danger"></span>
+
+            </div>
+
+            <div class="form-group">
+                <label asp-for="Description" class="control-label"></label>
+                <input class="form-control input-validation-error" type="text" data-val="true"
+                       data-val-required="A description is required." id="Description" name="Description" onfocusout="trimFunction('Description')"
+                       value="" aria-describedby="Description-error" aria-invalid="true" maxlength="100" required>
+                <span asp-validation-for="Description" class="text-danger"></span>
+            </div>
+
+            @*<div>
+                <button id="btnAdd" type="button" value="Add" class="btn btn-primary">Add actor</button>
+                <button id="btnDel" type="button" value="Remove" class="btn btn-primary">Remove actor</button>
+            </div>*@
+
+            <div class="form-group" id="MainActorDiv">
+                <label asp-for="MainActor" class="control-label"></label>
+                @*<input id="actorTb0" asp-for="Actors[0]" class="form-control" />*@
+                @*<input id="actorTb0" class="form-control valid" type="text" name="Actors[0]" value="" aria-invalid="false">*@
+                <input class="form-control input-validation-error" type="text" data-val="false" id="MainActor" name="MainActor" onfocusout="trimFunction('MainActor')"
+                       value="" aria-describedby="MainActor-error" aria-invalid="true" maxlength="25" required>
+                <span asp-validation-for="MainActor" class="text-danger"></span>
+            </div>
+
+
+            <div class="form-group">
+                <label asp-for="Ranking" class="control-label"></label>
+                <input class="form-control input-validation-error" type="number" data-val="true"
+                       data-val-required="A ranking is required." id="Ranking" name="Ranking"
+                       value="" aria-describedby="Ranking-error" aria-invalid="true" min="1" max="10" required>
+                <span asp-validation-for="Ranking" class="text-danger"></span>
+            </div>
+
+            
+
+            <div class="form-group">
+                <input type="hidden" name="id" value="" />
+                <input id="submitBtn" type="submit" value="Add Movie" class="btn btn-default" />
+            </div>
+
+        </form>
+    </div>
+</div>
+
+<div>
+    <a asp-action="Index">Back to List</a>
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}
